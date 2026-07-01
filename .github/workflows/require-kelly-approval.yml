@@ -1,0 +1,34 @@
+name: Require Kelly Approval
+
+on:
+  pull_request_review:
+    types: [submitted, dismissed]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  check-kelly-approved:
+    name: Kelly approval required
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Kgomez-empowerhr approved
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const reviews = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+
+            const kellyApproved = reviews.data.some(
+              r => r.user.login === 'Kgomez-empowerhr' && r.state === 'APPROVED'
+            );
+
+            if (!kellyApproved) {
+              core.setFailed('Approval from Kgomez-empowerhr is required before merging.');
+            } else {
+              console.log('Kgomez-empowerhr has approved.');
+            }
