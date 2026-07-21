@@ -11,7 +11,6 @@ Audit is required for:
 - security or permission changes,
 - employee personal data handling,
 - SQL changes in high-risk areas,
-- PHP version migration diffs,
 
 ## Audit Method
 
