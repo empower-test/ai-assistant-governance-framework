@@ -10,7 +10,6 @@ Audit is required for:
 - deductions, benefits, taxes, loans, attendance, overtime, or accounting,
 - security or permission changes,
 - employee personal data handling,
-- SQL changes in high-risk areas,
 
 ## Audit Method
 
